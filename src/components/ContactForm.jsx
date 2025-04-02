@@ -15,7 +15,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg h-screen">
       <h1 className="text-3xl font-bold text-center mb-4 text-blue-600">Contact Us</h1>
       <p className="text-gray-700 text-center mb-6">
         Have a question or need legal assistance? Fill out the form below and we'll get back to you as soon as possible.

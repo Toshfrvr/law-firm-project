@@ -1,6 +1,6 @@
 export default function About() {
     return (
-      <div className="max-w-4xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg">
+      <div className="max-w-4xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg h-screen">
         <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">About Our Firm</h1>
         <p className="text-gray-700 text-lg leading-relaxed">
           At <strong>Tosh The Gr8 Advocates Law Firm</strong>, we are dedicated to providing top-tier legal services tailored to our clients' needs. With a team of experienced lawyers, paralegals, and legal consultants, we specialize in various areas of law, including corporate law, family law, criminal defense, and real estate disputes.

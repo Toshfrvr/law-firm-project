@@ -9,7 +9,7 @@ export default function Navbar() {
       <div className="flex items-center space-x-6">
       <ul className="flex space-x-6">
           <li><Link to="/" className="hover:text-gray-200">Home</Link></li>
-          <li><Link to="/cases" className="hover:text-gray-200">Case</Link></li>
+          <li><Link to="/case-list" className="hover:text-gray-200">Case</Link></li>
           <li><Link to="/about" className="hover:text-gray-200">About Us</Link></li>
           <li><Link to="/contact" className="hover:text-gray-200">Contact</Link></li>
         </ul>
