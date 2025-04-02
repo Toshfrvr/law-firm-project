@@ -7,11 +7,12 @@ import ProtectedRoute from "./ProtectedRoute";
 import Signup from "./routes/Signup";
 import NotFound from "./routes/NotFound";
 import Navbar from "./components/Navbar";
-import Contact from "../ContactForm";
-import About from "../About";
+import Contact from "./components/ContactForm";
+import About from "./components/About";
 import Footer from "./components/Footer";
 import CaseList from "./components/CaseList";
-import Chat from "../Chat";
+// import CaseManagement from "./components/caseManagement";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/" element={<Register />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/case-list" element={<CaseList />} />
+            <Route path="/case-list" element={<CaseList/>} />
             <Route path="/about" element={<About />} />
             <Route path="/signup" element={<Signup />} />
             <Route

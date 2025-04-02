@@ -1,70 +1,74 @@
-import { useState, useEffect } from "react";
-import { supabase } from "../supabase";
-import CaseForm from "./CaseForm";
+// src/components/CaseList.jsx
+import React from 'react';
 
-export default function CaseList({ cases, userRole, fetchCases }) {
-  const [editingCase, setEditingCase] = useState(null);
-  const [clients, setClients] = useState({});
+// Generating 50 dummy cases for the table
+const generateDummyData = () => {
+  const statuses = ["Open", "Closed", "In Progress"];
+  const caseTypes = ["Criminal", "Civil", "Family", "Corporate", "Property"];
+  const dummyData = [];
 
-  useEffect(() => {
-    fetchClients();
-  }, []);
+  for (let i = 1; i <= 50; i++) {
+    dummyData.push({
+      id: i,
+      clientName: `Client ${i}`,
+      caseType: caseTypes[i % caseTypes.length],
+      status: statuses[i % statuses.length],
+      date: `2025-04-${String(i % 30 + 1).padStart(2, '0')}`,
+      lawyer: `Lawyer ${i % 5 + 1}`,
+    });
+  }
+  return dummyData;
+};
 
-  const fetchClients = async () => {
-    const { data, error } = await supabase.from("clients").select("id, name");
-    if (error) console.error("Error fetching clients:", error.message);
-    else {
-      const clientMap = data.reduce((acc, client) => {
-        acc[client.id] = client.name;
-        return acc;
-      }, {});
-      setClients(clientMap);
-    }
-  };
+const cases = generateDummyData();
 
+const CaseList = () => {
+  const caseStatuses = ["Open", "Closed", "In Progress"];
   return (
-    <div className="mt-4">
-      <h2 className="text-xl font-semibold mb-4">Cases</h2>
-      <ul className="divide-y divide-gray-200">
-        {cases.length === 0 ? (
-          <p>No cases available</p>
-        ) : (
-          cases.map((caseItem) => (
-            <li key={caseItem.id} className="p-4 border rounded-lg shadow-sm mb-2">
-              <h3 className="text-lg font-bold">{caseItem.title}</h3>
-              <p>{caseItem.description}</p>
-              <p>Status: <span className="font-semibold">{caseItem.status}</span></p>
-              <p>Client: <span className="font-semibold">{clients[caseItem.client_id] || "Unassigned"}</span></p>
+    <div className="p-8 space-y-8">
+      {/* Case Status Cards */}
+      <div className="grid grid-cols-3 gap-4">
+        {caseStatuses.map((status, index) => (
+          <div
+            key={index}
+            className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-center"
+          >
+            <h3 className="text-xl font-semibold">{status} Cases</h3>
+            <span className="text-3xl font-bold">{cases.filter(c => c.status === status).length}</span>
+          </div>
+        ))}
+      </div>
 
-              {(userRole === "admin" || userRole === "lawyer") && (
-                <button
-                  className="mt-2 mr-2 px-4 py-2 bg-blue-600 text-white rounded"
-                  onClick={() => setEditingCase(caseItem)}
-                >
-                  Edit Case
-                </button>
-              )}
-
-              {userRole === "admin" && (
-                <button
-                  className="mt-2 px-4 py-2 bg-red-600 text-white rounded"
-                  onClick={() => handleDelete(caseItem.id)}
-                >
-                  Delete
-                </button>
-              )}
-            </li>
-          ))
-        )}
-      </ul>
-
-      {editingCase && (
-        <CaseForm
-          fetchCases={fetchCases}
-          editingCase={editingCase}
-          setEditingCase={setEditingCase}
-        />
-      )}
+      {/* Case Table */}
+      <div className="overflow-x-auto bg-white p-6 rounded-lg shadow-lg">
+        <h3 className="text-2xl font-semibold mb-4">All Cases</h3>
+        <table className="min-w-full table-auto">
+          <thead>
+            <tr className="border-b">
+              <th className="px-4 py-2 text-left">Case ID</th>
+              <th className="px-4 py-2 text-left">Client Name</th>
+              <th className="px-4 py-2 text-left">Case Type</th>
+              <th className="px-4 py-2 text-left">Status</th>
+              <th className="px-4 py-2 text-left">Date</th>
+              <th className="px-4 py-2 text-left">Lawyer</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cases.map((caseItem) => (
+              <tr key={caseItem.id} className="border-b">
+                <td className="px-4 py-2">{caseItem.id}</td>
+                <td className="px-4 py-2">{caseItem.clientName}</td>
+                <td className="px-4 py-2">{caseItem.caseType}</td>
+                <td className="px-4 py-2">{caseItem.status}</td>
+                <td className="px-4 py-2">{caseItem.date}</td>
+                <td className="px-4 py-2">{caseItem.lawyer}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
-}
+};
+
+export default CaseList;
