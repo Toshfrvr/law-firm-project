@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import react , { useState, useEffect } from "react";
 import { supabase } from "../supabase";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../routes/AuthContext";
@@ -49,8 +49,11 @@ export default function Register() {
           role: formData.role,
         },
       ]);
-
+      const navigate = useNavigate()
       if (dbError) throw new Error(dbError.message);
+      if ("lawyer"){
+        navigate("/lawyer-dashboard")
+      }
 
       // Update context & redirect
       setUser(data.user);

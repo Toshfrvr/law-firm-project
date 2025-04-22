@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import CaseList from "./components/CaseList";
 // import CaseManagement from "./components/caseManagement";
 import Chat from "./components/Chat";
+import LawyerDashboard from "./components/LawyerDashboard";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/case-list" element={<CaseList/>} />
             <Route path="/about" element={<About />} />
             <Route path="/signup" element={<Signup />} />
+            {/* <Route path="/lawyer-dashboard" element={<LawyerDashboard />} /> */}
             <Route
               path="/dashboard"
               element={
